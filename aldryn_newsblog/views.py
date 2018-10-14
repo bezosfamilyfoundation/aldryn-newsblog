@@ -240,7 +240,7 @@ class ArticleList(ArticleListBase):
         exclude_count = self.config.exclude_featured
         if exclude_count:
             featured_qs = Article.objects.all().filter(
-                app_config=self.app_config,
+                app_config=self.config,
                 is_featured=True
             )
 
