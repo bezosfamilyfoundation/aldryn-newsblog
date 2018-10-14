@@ -234,19 +234,22 @@ class ArticleList(ArticleListBase):
     show_header = True
 
     def get_queryset(self):
-        # qs = super(ArticleList, self).get_queryset()
-        # # exclude featured articles from queryset, to allow featured article
-        # # plugin on the list view page without duplicate entries in page qs.
-        # exclude_count = self.config.exclude_featured
-        # if exclude_count:
-        #     featured_qs = Article.objects.all().filter(is_featured=True)
-        #     if not self.edit_mode:
-        #         featured_qs = featured_qs.published()
-        #     exclude_featured = featured_qs[:exclude_count].values_list('pk')
-        #     qs = qs.exclude(pk__in=exclude_featured)
-        # return qs
-        print('Collecting Articles!')
-        return Article.objects.all().filter(is_featured=True)[:5]
+        qs = super(ArticleList, self).get_queryset()
+        # exclude featured articles from queryset, to allow featured article
+        # plugin on the list view page without duplicate entries in page qs.
+        exclude_count = self.config.exclude_featured
+        if exclude_count:
+            featured_qs = Article.objects.all().filter(
+                app_config=self.app_config,
+                is_featured=True
+            )
+
+            if not self.edit_mode:
+                featured_qs = featured_qs.published()
+            exclude_featured = featured_qs[:exclude_count].values_list('pk')
+            qs = qs.exclude(pk__in=exclude_featured)
+            qs = qs.order_by('-publishing_date')
+        return qs
 
 
 class ArticleSearchResultsList(ArticleListBase):
