@@ -245,7 +245,8 @@ class ArticleList(ArticleListBase):
         #     exclude_featured = featured_qs[:exclude_count].values_list('pk')
         #     qs = qs.exclude(pk__in=exclude_featured)
         # return qs
-        return Article.objects.all().filter(is_featured=True)
+        print('Collecting Articles!')
+        return Article.objects.all().filter(is_featured=True)[:5]
 
 
 class ArticleSearchResultsList(ArticleListBase):
