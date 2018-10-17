@@ -120,8 +120,8 @@ class Article(TranslatedAutoSlugifyMixin,
     content = PlaceholderField('newsblog_article_content',
                                related_name='newsblog_article_content')
     # original author field
-    author = models.ForeignKey(Person, null=True, blank=True,
-                              verbose_name=_('author'))
+    # author = models.ForeignKey(Person, null=True, blank=True,
+                              # verbose_name=_('author'))
 
     # Sorted Many to Many field.
     authors = SortedM2MModelField(
