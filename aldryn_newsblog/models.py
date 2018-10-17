@@ -27,6 +27,7 @@ from aldryn_translation_tools.models import (
     TranslationHelperMixin, TranslatedAutoSlugifyMixin,
 )
 from aldryn_newsblog.utils.utilities import get_valid_languages_from_request
+from aldryn_common.admin_fields.sortedm2m import SortedM2MModelField
 
 from cms.models.fields import PlaceholderField
 from cms.models.pluginmodel import CMSPlugin
@@ -118,8 +119,16 @@ class Article(TranslatedAutoSlugifyMixin,
 
     content = PlaceholderField('newsblog_article_content',
                                related_name='newsblog_article_content')
-    author = models.ForeignKey(Person, null=True, blank=True,
-                               verbose_name=_('author'))
+    # original author field
+    # author = models.ForeignKey(Person, null=True, blank=True,
+    #                           verbose_name=_('author'))
+
+    # Sorted Many to Many field.
+    author = SortedM2MModelField(
+        'aldryn_people.Person', default=None, blank=True, related_name='author',
+        help_text=_('Choose and order the authors for this article')
+    )
+
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('owner'))
     app_config = AppHookConfigField(NewsBlogConfig,
                                     verbose_name=_('Apphook configuration'))
