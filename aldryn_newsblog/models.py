@@ -124,7 +124,7 @@ class Article(TranslatedAutoSlugifyMixin,
     #                           verbose_name=_('author'))
 
     # Sorted Many to Many field.
-    author = SortedM2MModelField(
+    authors = SortedM2MModelField(
         'aldryn_people.Person',
         default=None,
         blank=True,
