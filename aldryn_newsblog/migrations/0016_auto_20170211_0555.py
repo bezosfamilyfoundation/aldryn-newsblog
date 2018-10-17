@@ -28,9 +28,5 @@ class Migration(migrations.Migration):
             name='authors',
             field=aldryn_common.admin_fields.sortedm2m.SortedM2MModelField(blank=True, default=None, help_text='Choose and order the authors for this article', related_name='articles', to='aldryn_people.Person'),
         ),
-
-        migrations.RemoveField(
-            model_name='article',
-            name='author',
-        ),
+        migrations.RunPython(move_authors),
     ]
