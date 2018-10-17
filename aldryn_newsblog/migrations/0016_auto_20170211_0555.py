@@ -7,8 +7,11 @@ from django.db import migrations
 
 def move_authors(apps, schema_editor):
     Article = apps.get_model('aldryn_newsblog.Article', 'Article')
+    print('migrating authors...')
     for article in Article.objects.all():
+        print('author is: ', article.author)
         article.authors = [article.author]
+        print('saving article: ', article)
         article.save()
 
 
