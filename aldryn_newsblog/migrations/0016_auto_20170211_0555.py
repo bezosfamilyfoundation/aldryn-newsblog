@@ -5,6 +5,12 @@ from __future__ import unicode_literals
 import aldryn_common.admin_fields.sortedm2m
 from django.db import migrations
 
+def move_authors(apps, schema_editor):
+    Article = apps.get_model('aldryn_newsblog.Article', 'Article')
+    for article in Article.objects.all():
+        article.authors = [article.author]
+        article.save()
+
 
 class Migration(migrations.Migration):
 
@@ -14,14 +20,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.AddField(
+            model_name='article',
+            name='authors',
+            field=aldryn_common.admin_fields.sortedm2m.SortedM2MModelField(blank=True, default=None, help_text='Choose and order the authors for this article', related_name='articles', to='aldryn_people.Person'),
+        ),
+
         migrations.RemoveField(
             model_name='article',
             name='author',
         ),
-        migrations.AddField(
-            model_name='article',
-            name='author',
-            field=aldryn_common.admin_fields.sortedm2m.SortedM2MModelField(blank=True, default=None, help_text='Choose and order the authors for this article', related_name='articles', to='aldryn_people.Person'),
-        ),
     ]
-
