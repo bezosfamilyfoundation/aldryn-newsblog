@@ -304,7 +304,7 @@ class AuthorArticleList(ArticleListBase):
         # Note: each Article.author is Person instance with guaranteed
         # presence of unique slug field, which allows to use it in URLs
         return super(AuthorArticleList, self).get_queryset().filter(
-            authors__in=self.author
+            authors=self.author
         )
 
     def get(self, request, author):
