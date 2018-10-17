@@ -120,7 +120,6 @@ class ArticleAdmin(
         (None, {
             'fields': (
                 'title',
-                'author',
                 'authors',
                 'publishing_date',
                 'is_published',
