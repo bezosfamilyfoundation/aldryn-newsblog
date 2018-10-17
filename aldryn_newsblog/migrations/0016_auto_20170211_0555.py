@@ -6,7 +6,7 @@ import aldryn_common.admin_fields.sortedm2m
 from django.db import migrations
 
 def move_authors(apps, schema_editor):
-    Article = apps.get_model('aldryn_newsblog.Article', 'Article')
+    Article = apps.get_model('aldryn_newsblog', 'Article')
     print('migrating authors...')
     for article in Article.objects.all():
         print('author is: ', article.author)
