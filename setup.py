@@ -8,7 +8,7 @@ REQUIREMENTS = [
     'aldryn-apphooks-config>=0.2.4',
     'aldryn-boilerplates>=0.7.2',
     'aldryn-categories',
-    'aldryn-common=1.0.4',
+    'aldryn-common==1.0.4',
     'aldryn-people>=1.1.0',
     'aldryn-reversion>=0.1.0',
     'aldryn-translation-tools>=0.2.0',
